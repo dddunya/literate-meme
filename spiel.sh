@@ -89,12 +89,18 @@ my_game() {
 	#Random number
 	num=$((RANDOM % 11))
 	free
+	echo -e "\t\t${NC}     Please enter your name to start"
+	free
+	read name
+	clear
+	free
 	echo -e "\t\t${YELLOW}     🎯 Guess a number between 1 and 10:"
 	read guess
 
 	##Loop for the right guess and attempts
 	while [[ "$guess" -ne "$num" ]]; do
-		attempts=$(($attempts + 1))
+		attempts_new=$(($attempts + 1))
+
 		if [[ "$guess" -lt "$num" ]]; then
 			echo -e "${RED}⬇ Too low! Try again."
 			read guess
@@ -111,6 +117,7 @@ my_game() {
 		fi
 
 	done
+
 	free
 	echo -e "\t${GREEN}✅Correct! You guessed it in $attempts attempts!"
 	free
@@ -145,8 +152,11 @@ fi
 #Option-exit-to-menu-ingame
 
 if [ "$option_ingame" = "3" ] || [ "$option_ingame" = "menu" ] || [ "$option_ingame" = "Menu" ] || [ "$option_ingame" = "m" ]; then
-	free
-	menu
+	while [ "$option_ingame" = "3" ] || [ "$option_ingame" = "menu" ] || [ "$option_ingame" = "Menu" ] || [ "$option_ingame" = "m" ]; do
+		free
+		menu
+	done
+
 fi
 
 #Option-exit-ingame
