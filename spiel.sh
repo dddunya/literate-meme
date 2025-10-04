@@ -17,7 +17,7 @@ CYAN='\033[1;36m'
 NC='\033[0m' # No Color
 
 #Game vars
-num=$((RANDOM % 11))
+# num=$((RANDOM % 11))
 
 # tab='\t'
 
@@ -86,6 +86,8 @@ menu() {
 my_game() {
 	##Attempts
 	attempts=1
+	#Random number
+	num=$((RANDOM % 11))
 	free
 	echo -e "\t\t${YELLOW}     🎯 Guess a number between 1 and 10:"
 	read guess
@@ -134,9 +136,11 @@ fi
 
 #Option-play-again-ingame
 if [ "$option_ingame" = "2" ] || [ "$option_ingame" = "play" ] || [ "$option_ingame" = "Play" ] || [ "$option_ingame" = "Play again" ]; then
-	free
-	clear
-	my_game
+	while [ "$option_ingame" = "2" ] || [ "$option_ingame" = "play" ] || [ "$option_ingame" = "Play" ] || [ "$option_ingame" = "Play again" ]; do
+		free
+		clear
+		my_game
+	done
 fi
 #Option-exit-to-menu-ingame
 
