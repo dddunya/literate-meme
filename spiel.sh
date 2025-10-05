@@ -25,64 +25,7 @@ NC='\033[0m' # No Color
 free() {
 	echo
 }
-
-#Welcome menu
-welcome_menu() {
-	free
-	echo -e "\t${NC}##################################"
-	echo -e "\t${NC}#                                #"
-	echo -e "\t# ${YELLOW}Welcome to Guess the Number!🎲 ${NC}#"
-	echo -e "\t${NC}#                                #"
-	echo -e "\t${NC}##################################\n"
-}
-welcome_menu
-
-#Rules_menu
-rules_menu() {
-	echo -e "\t${NC} The rules are simple:"
-	free #4 spaces
-	echo -e "\t${NC}   - The computer will randomly pick a secret number."
-	echo -e "\t${NC}   - Your job is to guess it as quickly as possible."
-	echo -e "\t${NC}   - After each guess, you’ll be told if the number is higher or lower than your choice."
-	echo -e "\t${NC}   - The fewer attempts you need, the better your score!"
-	free
-	echo -e "\t${CYAN}     At the end of the game, your score will be recorded on the Scoreboard 🏆."
-}
-rules_menu
-
-#Option-menu
-option_menu_home() {
-	free
-	free
-	echo -e "\t${CYAN} Choose an option to begin:"
-	free
-	echo -e "\t${YELLOW}     1. View Scoreboard 🏆"
-	echo -e "\t${CYAN}     2. Start Playing ▶️"
-	echo -e "\t${RED}     3. Exit ❌"
-	read option
-}
-option_menu_home
-
-# Option_menu_ingame  Opens a menu IN THE GAME
-
-option_menu_ingame() {
-	echo -e "\t${YELLOW}     1. View Scoreboard 🏆"
-	echo -e "\t${CYAN}     2. Play again ▶️"
-	echo -e "\t${GREEN}     3. Menu 🚀"
-	echo -e "\t${RED}     4. Exit ❌"
-	read option_ingame
-}
-#Menu
-menu() {
-	welcome_menu
-	rules_menu
-	option_menu_home
-	my_game
-}
-
-#Option-scoreboard
-
-#Game-function
+#Game function
 my_game() {
 	##Attempts
 	attempts=1
@@ -121,49 +64,55 @@ my_game() {
 	free
 	echo -e "\t${GREEN}✅Correct! You guessed it in $attempts attempts!"
 	free
-	option_menu_ingame
+
 }
+clear
+#Welcome screen
+free
+echo -e "\t${NC}##################################"
+echo -e "\t${NC}#                                #"
+echo -e "\t# ${YELLOW}Welcome to Guess the Number!🎲 ${NC}#"
+echo -e "\t${NC}#                                #"
+echo -e "\t${NC}##################################\n"
+
+#Rules
+echo -e "\t${NC} The rules are simple:"
+free #4 spaces
+echo -e "\t${NC}   - The computer will randomly pick a secret number."
+echo -e "\t${NC}   - Your job is to guess it as quickly as possible."
+echo -e "\t${NC}   - After each guess, you’ll be told if the number is higher or lower than your choice."
+echo -e "\t${NC}   - The fewer attempts you need, the better your score!"
+free
+echo -e "\t${CYAN}     At the end of the game, your score will be recorded on the Scoreboard 🏆."
 
 #Option-play
-if [ "$option" = "2" ] || [ "$option" = "play" ] || [ "$option" = "Play" ]; then
-	clear
-	my_game
-fi
-
-#Option-exit
-
-if [ "$option" = "3" ] || [ "$option" = "ex" ] || [ "$option" = "exit" ] || [ "$option" = "Exit" ]; then
+while true; do
 	free
-	echo "Bye"
-fi
-
-#Ingame-menu
-
-#Option-scoreboard-ingame
-
-#Option-play-again-ingame
-if [ "$option_ingame" = "2" ] || [ "$option_ingame" = "play" ] || [ "$option_ingame" = "Play" ] || [ "$option_ingame" = "Play again" ]; then
-	while [ "$option_ingame" = "2" ] || [ "$option_ingame" = "play" ] || [ "$option_ingame" = "Play" ] || [ "$option_ingame" = "Play again" ]; do
+	free
+	echo -e "\t${CYAN} Choose an option to begin:"
+	free
+	echo -e "\t${YELLOW}     1. View Scoreboard 🏆"
+	echo -e "\t${CYAN}     2. Start Playing ▶️"
+	echo -e "\t${RED}     3. Exit ❌"
+	read option
+	case $option in
+	1)
+		clear
 		free
+		echo -e "\t${YELLOW} 🏆 Scoreboard:${NC}"
+		free
+		free
+		bat --style=numbers scoreboard.txt
+		;;
+	2)
 		clear
 		my_game
-	done
-fi
-#Option-exit-to-menu-ingame
-
-if [ "$option_ingame" = "3" ] || [ "$option_ingame" = "menu" ] || [ "$option_ingame" = "Menu" ] || [ "$option_ingame" = "m" ]; then
-	while [ "$option_ingame" = "3" ] || [ "$option_ingame" = "menu" ] || [ "$option_ingame" = "Menu" ] || [ "$option_ingame" = "m" ]; do
 		free
-		menu
-	done
+		;;
+	3)
+		echo -e "${RED}Bye! 👋${NC}"
+		exit 0
+		;;
+	esac
 
-fi
-
-#Option-exit-ingame
-
-if [ "$option_ingame" = "4" ] || [ "$option_ingame" = "ex" ] || [ "$option_ingame" = "exit" ] || [ "$option_ingame" = "Exit" ]; then
-	free
-	echo "Bye"
-fi
-
-#heeeey
+done
